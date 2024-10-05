@@ -103,7 +103,9 @@
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
-            class="h-4 w-4 opacity-70"
+            class="h-4 w-4 opacity-70 cursor-pointer"
+            onclick="handleClick()"
+            id="search-box"
           >
             <path
               fill-rule="evenodd"
@@ -113,6 +115,22 @@
           </svg>
         </label>
       </section>
+      <!-- spinner -->
+      <div class="flex justify-center mb-5">
+        <button class="btn btn-square hidden" id="spinner">
+          <span class="loading loading-spinner"></span>
+        </button>
+      </div>
+      <!-- card section start -->
+      <section class="w-11/12 mx-auto">
+        <div id="div-container" class="grid grid-cols-3 mb-20 gap-5"></div>
+        <div class="text-center mb-10">
+          <button onclick="handleAllProduct()" class="btn px-10 bg-green-400">
+            More Products
+          </button>
+        </div>
+      </section>
+      <!-- card section end -->
     </main>
     <!-- footer section -->
     <footer class="w-11/12 mx-auto">
@@ -155,5 +173,7 @@
         </form>
       </footer>
     </footer>
+    <!-- script file  -->
+    <script src="js/index.js"></script>
   </body>
 </html>
