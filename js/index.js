@@ -31,7 +31,7 @@ const displayAllPhone = (phones) => {
     <h2 class="card-title text-3xl font-bold">${phone.phone_name}</h2>
     <p>${phone.slug}</p>
     <div class="card-actions">
-      <button class="btn px-10 bg-green-400">Buy Now</button>
+      <button onclick="phoneDetails('${phone.slug}')" class="btn px-10 bg-green-400">Buy Now</button>
     </div>
   </div>
 </div>
@@ -50,6 +50,45 @@ const handleClick = () => {
 
 const handleAllProduct = (phone) => {
   loadAllPhone(true);
+};
+
+const phoneDetails = async (slug) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phone/${slug}`
+  );
+  const data = await res.json();
+  const modalContainer = document.getElementById("modal-container");
+  modalContainer.innerHTML = `
+  <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+                         <figure class="px-10 pt-10 mb-3">
+                         <img
+                         src=${data.data.image}
+                         class="rounded-xl" />
+                         </figure>
+              <h3 class="text-2xl font-bold">${data.data.name}</h3>
+              <p class="py-1 font-bold">Storage :
+                ${data.data.mainFeatures.storage}
+              </p>
+              <p class="py-1 font-bold">Memory :
+                ${data.data.mainFeatures.memory}
+              </p>
+              <p class="py-1 font-bold">Sensors :
+                ${data.data.mainFeatures.sensors}
+              </p>
+              <p class="py-1 font-bold">ReleaseDate :
+                ${data.data.releaseDate}
+              </p>
+              <div class="modal-action">
+                <form method="dialog">
+                  <!-- if there is a button in form, it will close the modal -->
+                  <button class="btn">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+`;
+  my_modal_1.showModal();
 };
 
 loadAllPhone(false, "iphone");
